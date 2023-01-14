@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserInfoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +21,8 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::post('uploadavator', [UserInfoController::class, 'uploadAvatar'])
+                ->name('uploadavator');
 
 require __DIR__.'/auth.php';
