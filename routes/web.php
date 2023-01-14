@@ -24,5 +24,7 @@ Route::get('/dashboard', function () {
 
 Route::post('uploadavator', [UserInfoController::class, 'uploadAvatar'])
                 ->name('uploadavator');
+Route::post('updateuser', [UserInfoController::class, 'updateUser'])
+                ->name('updateuser');
 
 require __DIR__.'/auth.php';
