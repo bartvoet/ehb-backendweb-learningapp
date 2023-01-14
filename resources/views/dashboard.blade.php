@@ -10,7 +10,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     You're logged in! {{ Auth::user()->name }}
-
+                    @if(Auth::user()->avatar)
+                    <img class="image rounded-circle" src="{{asset('/storage/images/'.Auth::user()->avatar)}}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
+                    @endif
                 </div>
                 <div class="card-body">
                     <form action="{{route('uploadavator')}}" method="POST" enctype="multipart/form-data">
