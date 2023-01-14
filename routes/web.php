@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserInfoController;
+use App\Http\Controllers\AdminController;
+use App\Http\App\Http\Middleware\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +28,9 @@ Route::post('uploadavator', [UserInfoController::class, 'uploadAvatar'])
                 ->name('uploadavator');
 Route::post('updateuser', [UserInfoController::class, 'updateUser'])
                 ->name('updateuser');
+
+Route::get('admininfo', [AdminController::class, 'index'])
+    ->name('admininfo')
+    ->middleware(['auth','admin']);
 
 require __DIR__.'/auth.php';
