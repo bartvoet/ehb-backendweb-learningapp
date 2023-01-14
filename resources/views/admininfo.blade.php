@@ -17,4 +17,17 @@
             </div>
         </div>
     </div>
+
+
+    {{ Form::open(array('method' => 'get')) }}
+    {{ Form::label('Filter', 'filter') }}
+    {{ Form::text('userfilter', '') }}
+    {{ Form::close() }}
+
+    {{ Form::open() }}
+    {{ Form::label('User', 'user') }}
+    {{ Form::select('userid', $users) }}
+    {{ Form::submit('Make admin') }}
+    {{ Form::close() }}
+
 </x-app-layout>

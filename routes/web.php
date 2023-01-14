@@ -33,4 +33,8 @@ Route::get('admininfo', [AdminController::class, 'index'])
     ->name('admininfo')
     ->middleware(['auth','admin']);
 
+Route::post('admininfo', [AdminController::class, 'post'])
+    ->name('admininfo')
+    ->middleware(['auth','admin']);
+
 require __DIR__.'/auth.php';
