@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\NewsItemController;
 use App\Http\Controllers\FAQCategoryController;
 use App\Http\Controllers\FAQItemController;
+use App\Http\Controllers\TagController;
 use App\Http\App\Http\Middleware\Admin;
 
 /*
@@ -43,5 +44,6 @@ Route::post('admininfo', [AdminController::class, 'post'])
 Route::resource('newsitems', NewsItemController::class);
 Route::resource('faqcategories', FAQCategoryController::class);
 Route::resource('faq', FAQItemController::class);
+Route::resource('tag', TagController::class);
 
 require __DIR__.'/auth.php';
