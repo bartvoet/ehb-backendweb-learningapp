@@ -1,4 +1,16 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+    @auth
+    <a class="navbar-brand" href="/dashboard">Profile</a>
+    <a class="navbar-brand" href="/newsitems">Newsitems</a>
+    <a class="navbar-brand" href="/faq">FAQs</a>
+    @if(Auth::user()->is_admin)
+    <a class="navbar-brand" href="/faqcategories">Newscategories</a>
+    <a class="navbar-brand" href="/admininfo">Adminstration</a>
+    <a class="navbar-brand" href="/tag">Tags</a>
+    @endif
+    @endauth
+    <a class="navbar-brand" href="/about.html">About</a>
+
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
