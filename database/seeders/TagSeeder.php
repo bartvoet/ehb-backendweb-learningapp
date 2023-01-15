@@ -13,6 +13,13 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // Add 1 default admin with a seeder
+        // Username: admin
+        // Email: admin@ehb.be
+        // Password: Password!321
+
+
+
+
     }
 }
