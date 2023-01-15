@@ -19,9 +19,10 @@
                         </div>
                     @endif
 
-                    @foreach($items as $item)
-                        <a href="{{ route('faq.show', $item->id) }}">{{ $item->question }}</a>: {{ $item->answer }}
-                        FAQCategory: {{ $item->category->name }}
+                    @foreach($categories as $category)
+                    FAQCategory: {{ $category->name }}<br/>
+                    @foreach($category->items as $item)
+                        FAQ: <a href="{{ route('faq.show', $item->id) }}">{{ $item->question }}</a>: {{ $item->answer }}
                         @auth
                           @if(Auth::user()->is_admin)
                             <a href="{{ route('faq.edit', $item->id) }}"> - Edit</a>
@@ -29,6 +30,8 @@
                           <br>
                         @endauth
                         <hr>
+                    @endforeach
+                    <br/>
                     @endforeach
 
                     @auth

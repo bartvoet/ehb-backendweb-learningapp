@@ -15,8 +15,8 @@ class FAQItemController extends Controller
      */
     public function index()
     {
-        $items = FAQItem::all();
-        return view('faq.index', compact('items'));
+        $categories = FAQCategory::all();
+        return view('faq.index', compact('categories'));
     }
 
     /**
