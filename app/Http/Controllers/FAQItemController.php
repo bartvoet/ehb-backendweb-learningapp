@@ -69,7 +69,8 @@ class FAQItemController extends Controller
     public function edit($id)
     {
         $faq = FAQItem::findOrFail($id);
-        return view('faq.edit', compact('faq'));
+        $categories = FAQCategory::all()->pluck('name', 'id');
+        return view('faq.edit', compact('faq','categories'));
     }
 
     /**
@@ -84,7 +85,11 @@ class FAQItemController extends Controller
         $faq = FAQItem::findOrFail($id);
         $faq->question = $request->input("question");
         $faq->answer = $request->input('answer');
-        $faq->save();
+
+        $category = FAQCategory::find($request->input("categoryid"));
+        $category->items()->save($faq);
+
+        //$faq->save();
         return redirect()->route('faq.index')->with('status', 'FAQ updated');
     }
 

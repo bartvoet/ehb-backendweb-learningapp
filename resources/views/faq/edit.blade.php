@@ -42,7 +42,10 @@
                                 @enderror
                             </div>
                         </div>
-
+                        <div class="form-group row">
+                            {{ Form::label('Category', 'user') }}
+                            {{ Form::select('categoryid', $categories, $faq->category->id) }}
+                        </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
