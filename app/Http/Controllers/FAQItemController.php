@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FAQItem;
 use App\Models\FAQCategory;
 use Illuminate\Http\Request;
 
-class FAQCategoryController extends Controller
+class FAQItemController extends Controller
 {
-    public function __construct(){
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +15,8 @@ class FAQCategoryController extends Controller
      */
     public function index()
     {
-        $categories = FAQCategory::all();
-        return view('faqcategories.index', compact('categories'));
+        $items = FAQItem::all();
+        return view('faq.index', compact('items'));
     }
 
     /**
@@ -29,7 +26,8 @@ class FAQCategoryController extends Controller
      */
     public function create()
     {
-        return view('faqcategories.create');
+        $categories = FAQCategory::all()->pluck('name', 'id');
+        return view('faq.create',["categories" => $categories]);
     }
 
     /**
@@ -40,64 +38,66 @@ class FAQCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $faq = new FAQCategory;
-        $faq->name = $request->input("name");
-        $faq->description = $request->input('description');
-        $faq->save();
-        return redirect()->route('faqcategories.index')->with('status', 'Categorie added');
+        $faq = new FAQItem;
+        $faq->question = $request->input("question");
+        $faq->answer = $request->input('answer');
+
+        $category = FAQCategory::find($request->input("categoryid"));
+        $category->items()->save($faq);
+
+        return redirect()->route('faq.index')->with('status', 'FAQ added');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\FAQCategory  $fAQCategory
+     * @param  \App\Models\FAQItem  $fAQItem
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $category = FAQCategory::findOrFail($id);
-        return view('faqcategories.show', compact('category'));
+        $faq = FAQItem::findOrFail($id);
+        return view('faq.show', compact('faq'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\FAQCategory  $fAQCategory
+     * @param  \App\Models\FAQItem  $fAQItem
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $category = FAQCategory::findOrFail($id);
-        return view('faqcategories.edit', compact('category'));
+        $faq = FAQItem::findOrFail($id);
+        return view('faq.edit', compact('faq'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\FAQCategory  $fAQCategory
+     * @param  \App\Models\FAQItem  $fAQItem
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $faq = FAQCategory::findOrFail($id);
-        $faq->name = $request->input("name");
-        $faq->description = $request->input('description');
+        $faq = FAQItem::findOrFail($id);
+        $faq->question = $request->input("question");
+        $faq->answer = $request->input('answer');
         $faq->save();
-        return redirect()->route('faqcategories.index')->with('status', 'Categorie updated');
+        return redirect()->route('faq.index')->with('status', 'FAQ updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\FAQCategory  $fAQCategory
+     * @param  \App\Models\FAQItem  $fAQItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $newsItem = FAQCategory::findOrFail($id);
-        $newsItem->delete();
-
+        $faq = FAQItem::findOrFail($id);
+        $faq->delete();
         return redirect()->route('faqcategories.index')->with('status', 'Categorie deleted');
     }
 }
