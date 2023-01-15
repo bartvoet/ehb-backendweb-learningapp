@@ -46,17 +46,17 @@ class NewsItemController extends Controller
             'content'     => 'required|min:5',
           ]);
 
-        $post = new NewsItem;
-        $post->title = $validated['title'];
-        $post->content = $validated['content'];
-        $post->publishing_date = now();
-        $post->save();
+        $item = new NewsItem;
+        $item->title = $validated['title'];
+        $item->content = $validated['content'];
+        $item->publishing_date = now();
+        $item->save();
 
-        $imageName = 'cover'.$post->id .'.'. $request->file->getClientOriginalExtension();
+        $imageName = 'cover'.$item->id .'.'. $request->file->getClientOriginalExtension();
         $request->file->storeAs('covers',$imageName,'public');
 
-        $post->image = $imageName;
-        $post->save();
+        $item->image = $imageName;
+        $item->save();
 
         return redirect()->route('newsitems.index')->with('status', 'Newsitem added');
     }
