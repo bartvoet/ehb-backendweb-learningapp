@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserInfoController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\NewsItemController;
 use App\Http\App\Http\Middleware\Admin;
 
 /*
@@ -36,5 +37,7 @@ Route::get('admininfo', [AdminController::class, 'index'])
 Route::post('admininfo', [AdminController::class, 'post'])
     ->name('admininfo')
     ->middleware(['auth','admin']);
+
+Route::resource('newsitems', NewsItemController::class);
 
 require __DIR__.'/auth.php';
