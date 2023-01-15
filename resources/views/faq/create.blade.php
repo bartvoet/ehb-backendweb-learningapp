@@ -56,7 +56,7 @@
 
 
 
-                        {{ Form::label('Category', 'user') }}
+                        {{ Form::label('Category', 'Choose category') }}
                         {{ Form::select('categoryid', $categories) }}
 
 

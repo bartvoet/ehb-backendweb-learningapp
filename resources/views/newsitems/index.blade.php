@@ -20,7 +20,7 @@
                     @endif
 
                     @foreach($newsitems as $item)
-                        <h3>Title: <a href="{{ route('newsitems.show', $item->id) }}">{{ $item->title }}</a></h3>
+                        Title: <a href="{{ route('newsitems.show', $item->id) }}">{{ $item->title }}</a>
                         - published at {{ $item->publishing_date }}
                         @auth
                           @if(Auth::user()->is_admin)
