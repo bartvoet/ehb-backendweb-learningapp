@@ -20,19 +20,15 @@
                     @endif
 
                     @foreach($newsitems as $item)
-                        <h3><a href="{{ route('newsitems.show', $item->id) }}">{{ $item->title }}</a></h3>
-                        {{-- <img src="/uploads/{{ $post->image }}" style="width: 500px;" /><br>
-                        <small>Gepost door <a href="{{ route('profile', $post->user->name) }}">{{ $post->user->name }}</a> op {{ $post->created_at->format('d/m/Y \o\m H:i') }}</small><br>
+                        <h3>Title: <a href="{{ route('newsitems.show', $item->id) }}">{{ $item->title }}</a></h3>
+                        - published at {{ $item->publishing_date }}
                         @auth
-                          @if($post->user_id == Auth::user()->id)
-                            <a href="{{ route('posts.edit', $post->id) }}">Edit Post</a>
-                          @else
-                            <a href="{{ route('like', $post->id) }}">Like Post</a>
+                          @if(Auth::user()->is_admin)
+                            <a href="{{ route('newsitems.edit', $item->id) }}"> - Edit</a>
                           @endif
                           <br>
                         @endauth
-                        Post heeft {{ $post->likes()->count() }} likes
-                        <hr> --}}
+                        <hr>
                     @endforeach
 
                     @auth

@@ -14,8 +14,8 @@
                 </div>
 
                 <div class="card-body">
-
-
+                    <img class="image rounded-circle" src="{{asset('/storage/covers/'.$newsitem->image)}}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
+                    <br>
                         <br>
 
                         <pre>{{ $newsitem->content }}</pre>

@@ -47,13 +47,13 @@ class NewsItemController extends Controller
         $post->publishing_date = now();
         $post->save();
 
-        // $imageName = $post->id .'.'. $request->file->getClientOriginalExtension();
-        // $request->file->move(public_path('/uploads'), $imageName);
+        $imageName = 'cover'.$post->id .'.'. $request->file->getClientOriginalExtension();
+        $request->file->storeAs('covers',$imageName,'public');
 
-        // $post->image = $imageName;
+        $post->image = $imageName;
         $post->save();
 
-        return redirect()->route('newsitem.index')->with('status', 'Newsitem added');
+        return redirect()->route('newsitems.index')->with('status', 'Newsitem added');
     }
 
     /**
@@ -77,7 +77,7 @@ class NewsItemController extends Controller
     public function edit($id)
     {
         $newsitem = NewsItem::findOrFail($id);
-        return view('newsitems.index', compact('newsitem'));
+        return view('newsitems.edit', compact('newsitem'));
     }
 
     /**
