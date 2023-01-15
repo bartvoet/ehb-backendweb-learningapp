@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserInfoController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\NewsItemController;
+use App\Http\Controllers\FAQCategoryController;
 use App\Http\App\Http\Middleware\Admin;
 
 /*
@@ -39,5 +40,6 @@ Route::post('admininfo', [AdminController::class, 'post'])
     ->middleware(['auth','admin']);
 
 Route::resource('newsitems', NewsItemController::class);
+Route::resource('faqcategories', FAQCategoryController::class);
 
 require __DIR__.'/auth.php';
