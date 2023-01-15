@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FAQItem;
 use App\Models\FAQCategory;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class FAQItemController extends Controller
@@ -57,7 +58,8 @@ class FAQItemController extends Controller
     public function show($id)
     {
         $faq = FAQItem::findOrFail($id);
-        return view('faq.show', compact('faq'));
+        $tags = Tag::all()->pluck('name', 'id');
+        return view('faq.show', compact('faq','tags'));
     }
 
     /**

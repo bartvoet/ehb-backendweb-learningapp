@@ -7,6 +7,7 @@ use App\Http\Controllers\NewsItemController;
 use App\Http\Controllers\FAQCategoryController;
 use App\Http\Controllers\FAQItemController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\TagLinkController;
 use App\Http\App\Http\Middleware\Admin;
 
 /*
@@ -45,5 +46,9 @@ Route::resource('newsitems', NewsItemController::class);
 Route::resource('faqcategories', FAQCategoryController::class);
 Route::resource('faq', FAQItemController::class);
 Route::resource('tag', TagController::class);
+
+Route::post("/linkTag/{id}", [TagLinkController::class, "linkTag"])
+        ->name("linkTag")
+        ->middleware(['auth','admin']);
 
 require __DIR__.'/auth.php';

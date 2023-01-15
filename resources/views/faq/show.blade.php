@@ -18,13 +18,27 @@
 
                         <pre>{{ $faq->answer }}</pre>
 
-                        <br><br>
+                        <br>
+                        Linked tags:
+                        @foreach($faq->tags as $tag)
+                            {{ $tag->name }}
+                        @endforeach
+
+                        {{ Form::open(array('route' => array('linkTag', $faq->id))) }}
+                        {{ Form::submit('Link new tag') }}
+                        {{ Form::select('tag_id', $tags) }}
+                        {{ Form::close() }}
+
+                        <br>
+
                         @auth
                           @if(Auth::user()->is_admin)
                             <a href="{{ route('faq.edit', $faq->id) }}">Edit item</a>
                           @endif
                           <br>
                         @endauth
+
+
 
                         @auth
                           @if(Auth::user()->is_admin)
