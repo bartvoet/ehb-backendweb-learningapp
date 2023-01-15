@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class TagController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware(['auth']);
+        $this->middleware(['admin'], ['except' => ['index', 'show']]);
     }
 
     /**

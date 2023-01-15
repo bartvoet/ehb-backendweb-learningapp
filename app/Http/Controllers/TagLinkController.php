@@ -8,9 +8,9 @@ use App\Models\FAQItem;
 
 class TagLinkController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
+    public function __construct(){
+        $this->middleware(['auth']);
+        $this->middleware(['admin'], ['except' => ['index', 'show']]);
     }
 
     public function linkTag(Request $request, $id)
